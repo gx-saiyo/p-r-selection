@@ -1,0 +1,46 @@
+apply plugin: "java"
+apply plugin: "application"
+
+repositories {
+  mavenCentral()
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src'
+    }
+  }
+  test {
+    java {
+      srcDir 'test'
+    }
+  }
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+  testLogging.showStandardStreams = true
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
+compileJava {
+  gradle.projectsEvaluated {
+    if (project.hasProperty('warn')) {
+      options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+  }
+  options.encoding = 'UTF-8'
+}
+
+run {
+  standardInput = System.in
+}
+
+mainClassName = 'Main'
+test.dependsOn 'cleanTest'
