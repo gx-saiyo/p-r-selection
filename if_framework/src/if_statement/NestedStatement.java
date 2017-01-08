@@ -14,6 +14,15 @@ public abstract class NestedStatement extends Statement {
         return this;
     }
 
+    protected boolean any(int number) {
+        for (Statement statement : statementList) {
+            if (statement.condition(number)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void select(int number) {
         for (Statement statement : statementList) {
