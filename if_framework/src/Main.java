@@ -1,6 +1,6 @@
 import if_statement.Statement;
 import if_statement.NestedStatement;
-import if_statement.StatementChain;
+import if_statement.ChainedStatement;
 
 /**
  * Created by n1631107 on 2017/01/08.
@@ -8,7 +8,7 @@ import if_statement.StatementChain;
 public class Main {
     static public void main(String[] argv) {
         // ifとelse ifの連鎖を保持するオブジェクトを用意する
-        StatementChain chain = new StatementChain();
+        ChainedStatement chain = new ChainedStatement();
 
         // 分岐Aを作成して、条件と処理を設定する
         Statement statementA = new Statement() {
@@ -75,8 +75,16 @@ public class Main {
         // ネストされた分岐をchainに追加する
         chain.append(nestedStatement);
 
-        // 分岐Eの条件と処理を設定して、chainに追加する
-        chain.append(new Statement() {
+        /*
+        if、else ifの連鎖を表すchainedStatementを作る
+        chainedStatementは次のif、else ifの連鎖を表すように初期化される:
+            if ((number >= 4) && (number <= 5)) {
+                System.out.printf("処理E (number=%d)%n", number);
+            } else if (number == 6) {
+                System.out.printf("処理F (number=%d)%n", number);
+            }
+         */
+        ChainedStatement chainedStatement = new ChainedStatement().append(new Statement() {
             @Override
             protected boolean condition(int number) {
                 return (number >= 4) && (number <= 5);
@@ -85,6 +93,32 @@ public class Main {
             @Override
             protected void select(int number) {
                 System.out.printf("処理E (number=%d)%n", number);
+            }
+        }).append(new Statement() {
+            @Override
+            protected boolean condition(int number) {
+                return number == 6;
+            }
+
+            @Override
+            protected void select(int number) {
+                System.out.printf("処理F (number=%d)%n", number);
+            }
+        });
+
+        // 分岐の連鎖をchainに追加する
+        chain.append(chainedStatement);
+
+        // 分岐Gの条件と処理を設定して、chainに追加する
+        chain.append(new Statement() {
+            @Override
+            protected boolean condition(int number) {
+                return number == 7;
+            }
+
+            @Override
+            protected void select(int number) {
+                System.out.printf("処理G (number=%d)%n", number);
             }
         });
 
@@ -102,6 +136,10 @@ public class Main {
                 }
             } else if ((number >= 4) && (number <= 5)) {
                 System.out.printf("処理E (number=%d)%n", number);
+            } else if (number == 6) {
+                System.out.printf("処理F (number=%d)%n", number);
+            } else if (number == 7) {
+                System.out.printf("処理G (number=%d)%n", number);
             }
          */
 
@@ -123,7 +161,13 @@ public class Main {
         // Eを実行する
         chain.select(5);
 
-        // どの処理も実行しない
+        // Fを実行する
         chain.select(6);
+
+        // Gを実行する
+        chain.select(7);
+
+        // どの処理も実行しない
+        chain.select(8);
     }
 }
