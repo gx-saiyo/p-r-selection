@@ -7,8 +7,8 @@ class Looper
 
   def loop
     while true
-      selector = @inputer.gets
-      return if selector == '0'
+      selector = @inputer.gets.to_i
+      return if selector == 0
       @fizz_buzz_runner.run(selector)
     end
   end
