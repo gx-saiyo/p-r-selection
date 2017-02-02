@@ -6,9 +6,8 @@
 
 function getIPhoneNumber($year){
   //2008年未満または2017年以上ならNullを返却
-  if(2008 < $year && $year <= 2017 ){
+  if(2008 <= $year && $year < 2017 ){
     $num = (int)substr($year, -2);
-
     if($num === 8){
       return '3G';
     }elseif ($num === 9) {
