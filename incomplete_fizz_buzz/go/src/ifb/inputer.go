@@ -1,17 +1,21 @@
 package ifb
 
 import (
-  "fmt"
+	"fmt"
 )
 
-type Inputer struct {}
-
-func CreateInputer() *Inputer {
-  return new(Inputer)
+type Inputer interface {
+	Gets() string
 }
 
-func (self *Inputer) Gets() string {
-  var str string
-  fmt.Scan(&str)
-  return str
+type Input struct{}
+
+func CreateInputer() *Input {
+	return new(Input)
+}
+
+func (self *Input) Gets() string {
+	var str string
+	fmt.Scan(&str)
+	return str
 }
