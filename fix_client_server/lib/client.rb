@@ -5,7 +5,7 @@ require 'sleeper'
 class Client
 
   PERMISSION_ERROR = 'permission error'
-  FREQUENCY_REQUEST_ERROR = 'frequency request error'
+  FREQUENCY_REQUEST_ERROR = 'too many request error'
 
   def initialize
     @connection = Connection.new
