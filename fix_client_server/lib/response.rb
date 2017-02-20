@@ -10,7 +10,7 @@ class Response
   def body
     return @body if @body
     return @body = 'permission error' if permitted?
-    return @body = 'too many request error' if unable_to_handle?
+    return @body = 'frequency request error' if unable_to_handle?
     @body = "ok"
     @body
   end
