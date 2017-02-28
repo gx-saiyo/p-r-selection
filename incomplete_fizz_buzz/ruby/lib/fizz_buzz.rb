@@ -15,7 +15,7 @@ module FizzBuzz
     end
   end
 
-  def fizz_buzz_history(number, printer)
+  def show_history(number, printer)
     if number == 0
       printer.execute("#{number}, #{number.to_s}")
     elsif number % 15 == 0
@@ -29,7 +29,7 @@ module FizzBuzz
     end
   end
 
-  def write(histories)
+  def write_history(histories)
     file = File.new('data.txt', 'w')
     for i in 0 .. (histories.size - 1) do
       history = histories[i]
@@ -46,5 +46,18 @@ module FizzBuzz
       end
     end
     file.close
+  end
+
+  def read_history(printer, file_name)
+    if File.exist?(file_name)
+      file = File.new(file_name, 'r')
+      begin
+        while true
+          printer.execute(file.readline.chomp)
+        end
+      rescue EOFError
+        file.close
+      end
+    end
   end
 end

@@ -7,6 +7,8 @@ class Looper
 
   def loop
     while true
+      puts "機能を選択してください. ('h' で ヘルプを表示)"
+      print "-> "
       selector = @inputer.gets
       return if selector == '0'
       @fizz_buzz_runner.run(selector)

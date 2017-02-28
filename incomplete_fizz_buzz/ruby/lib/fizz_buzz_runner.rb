@@ -1,6 +1,12 @@
 require 'fizz_buzz'
 
 class FizzBuzzRunner
+  HELP_TEXT = ["1: 整数を入力すると任意の文字列を表示",
+               "2: 入力と出力の履歴を表示",
+               "3: 入力と出力の履歴をファイルに保存",
+               "4: 保存したファイルを読み込み、過去の履歴を表示",
+               "0: プログラムを終了"]
+
 
   def initialize(inputer, printer)
     @inputer = inputer
@@ -9,27 +15,21 @@ class FizzBuzzRunner
   end
 
   def run(selector)
-    if selector == '1'
+    case selector
+    when '1' then
       number = @inputer.gets.to_i
       @histories << number
       FizzBuzz.fizz_buzz(number, @printer)
-    elsif selector == '2'
+    when '2' then
       for i in 0 .. (@histories.size - 1) do
-        FizzBuzz.fizz_buzz_history(@histories[i], @printer)
+        FizzBuzz.show_history(@histories[i], @printer)
       end
-    elsif selector == '3'
-      FizzBuzz.write(@histories)
-    elsif selector == '4'
-      if File.exist?('data.txt')
-        file = File.new('data.txt', 'r')
-        begin
-          while true
-           @printer.execute(file.readline.chomp)
-          end
-        rescue EOFError
-          file.close
-        end
-      end
+    when '3' then
+      FizzBuzz.write_history(@histories)
+    when '4' then
+      FizzBuzz.read_history(@printer, 'data.txt')
+    when 'h' then
+      puts HELP_TEXT
     end
   end
 end
