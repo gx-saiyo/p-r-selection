@@ -29,8 +29,8 @@ module FizzBuzz
     end
   end
 
-  def write_history(histories)
-    file = File.new('data.txt', 'w')
+  def write_history(histories, file_name)
+    file = File.new(file_name, 'w')
     for i in 0 .. (histories.size - 1) do
       history = histories[i]
       if history == 0
@@ -46,6 +46,7 @@ module FizzBuzz
       end
     end
     file.close
+    puts "#{file_name} に書き込みました."
   end
 
   def read_history(printer, file_name)

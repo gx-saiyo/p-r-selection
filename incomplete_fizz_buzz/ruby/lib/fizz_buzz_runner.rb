@@ -17,6 +17,8 @@ class FizzBuzzRunner
   def run(selector)
     case selector
     when '1' then
+      puts "整数を入力してください."
+      print "-> "
       number = @inputer.gets.to_i
       @histories << number
       FizzBuzz.fizz_buzz(number, @printer)
@@ -25,7 +27,7 @@ class FizzBuzzRunner
         FizzBuzz.show_history(@histories[i], @printer)
       end
     when '3' then
-      FizzBuzz.write_history(@histories)
+      FizzBuzz.write_history(@histories, 'data.txt')
     when '4' then
       FizzBuzz.read_history(@printer, 'data.txt')
     when 'h' then
