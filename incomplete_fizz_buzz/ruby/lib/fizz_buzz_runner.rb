@@ -21,7 +21,7 @@ class FizzBuzzRunner
       print "-> "
       number = @inputer.gets.to_i
       @histories << number
-      FizzBuzz.fizz_buzz(number, @printer)
+      FizzBuzz.judge(number, @printer)
     when '2' then
       for i in 0 .. (@histories.size - 1) do
         FizzBuzz.show_history(@histories[i], @printer)
