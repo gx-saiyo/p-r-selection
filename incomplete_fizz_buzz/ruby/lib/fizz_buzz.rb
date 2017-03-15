@@ -1,5 +1,4 @@
 module FizzBuzz
-  module_function
 
   def fizz_buzz(number, printer)
     if number == 0
