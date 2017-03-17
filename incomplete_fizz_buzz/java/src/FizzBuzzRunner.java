@@ -1,7 +1,10 @@
 import functions.FizzBuzz;
 import input.Inputable;
+import items.MenuType;
 import output.Printable;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.BufferedReader;
@@ -18,33 +21,43 @@ public class FizzBuzzRunner {
     this.printer = printer;
   }
 
-  public void run(String selector) {
-    if(selector.equals("1")) {
-      int number = Integer.parseInt(inputer.gets());
-      histories.add(number);
-      FizzBuzz.fizzBuzz(number, printer);
-    } else if(selector.equals("2")) {
-      for(int i=0; i < histories.size(); i++) {
-        FizzBuzz.fizzBuzzHistory(histories.get(i), printer);
-      }
-    } else if(selector.equals("3")) {
-      FizzBuzz.write(histories);
-    } else if(selector.equals("4")) {
-      FileReader fileReader = null;
-      BufferedReader bufferedReader = null;
-      try {
-        fileReader = new FileReader("data.txt");
-        bufferedReader = new BufferedReader(fileReader);
-        while(true) {
-          String line = bufferedReader.readLine();
-          if(line == null) {
-            break;
-          }
-          printer.execute(line);
+  public void run(int selector) {
+    switch (MenuType.getType(selector)) {
+      case FIZZBUZZ:
+        System.out.println("数字を入力してください");
+        try {
+          int number = Integer.parseInt(inputer.gets());
+          histories.add(number);
+          FizzBuzz.fizzBuzz(number, printer);
+        }catch (NumberFormatException e) {
+          System.out.println("数字以外が入力されました、もう一度やり直してください");
         }
-        fileReader.close();
-        bufferedReader.close();
-      } catch(Exception e) {}
+        break;
+      case HISTORY:
+        for(Integer i : histories) {
+          FizzBuzz.fizzBuzzHistory(i, printer);
+        }
+        break;
+      case SAVE:
+        FizzBuzz.write(histories);
+        break;
+      case LOAD:
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+          fileReader = new FileReader("data.txt");
+          bufferedReader = new BufferedReader(fileReader);
+          while (true) {
+            String line = bufferedReader.readLine();
+            if (line == null) break;
+            printer.execute(line);
+          }
+          fileReader.close();
+          bufferedReader.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        break;
     }
   }
 }

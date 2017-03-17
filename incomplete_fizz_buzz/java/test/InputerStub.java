@@ -1,3 +1,5 @@
+import input.Inputable;
+
 import java.util.Queue;
 
 public class InputerStub implements Inputable {
