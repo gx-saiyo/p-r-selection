@@ -1,3 +1,5 @@
+import input.Inputable;
+
 public class Looper {
 
   private FizzBuzzRunner fizzBuzzRunner;

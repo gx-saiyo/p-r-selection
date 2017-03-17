@@ -1,3 +1,7 @@
+import functions.FizzBuzz;
+import input.Inputable;
+import output.Printable;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.BufferedReader;
@@ -7,7 +11,7 @@ public class FizzBuzzRunner {
 
   private Inputable inputer;
   private Printable printer;
-  private List<Integer> histories = new ArrayList<Integer>();
+  private List<Integer> histories = new ArrayList<>();
 
   public FizzBuzzRunner(Inputable inputer, Printable printer) {
     this.inputer = inputer;

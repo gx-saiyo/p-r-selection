@@ -1,3 +1,7 @@
+package functions;
+
+import output.Printable;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.List;
