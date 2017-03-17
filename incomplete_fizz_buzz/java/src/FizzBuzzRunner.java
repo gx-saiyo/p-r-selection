@@ -3,7 +3,6 @@ import input.Inputable;
 import items.MenuType;
 import output.Printable;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -29,12 +28,12 @@ public class FizzBuzzRunner {
           int number = Integer.parseInt(inputer.gets());
           histories.add(number);
           FizzBuzz.fizzBuzz(number, printer);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
           System.out.println("数字以外が入力されました、もう一度やり直してください");
         }
         break;
       case HISTORY:
-        for(Integer i : histories) {
+        for (Integer i : histories) {
           FizzBuzz.fizzBuzzHistory(i, printer);
         }
         break;
