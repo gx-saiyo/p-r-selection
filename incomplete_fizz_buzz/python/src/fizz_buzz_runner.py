@@ -1,4 +1,3 @@
-import os
 import fizz_buzz
 
 class FizzBuzzRunner:
@@ -6,6 +5,7 @@ class FizzBuzzRunner:
   def __init__(self, inputer, printer):
     self.inputer = inputer
     self.printer = printer
+    self.filename = 'data.txt'
     self.histories = []
 
   def run(self, selector):
@@ -14,16 +14,8 @@ class FizzBuzzRunner:
       self.histories.append(number)
       fizz_buzz.fizz_buzz(number, self.printer)
     elif selector == '2':
-      for i in range(0, len(self.histories)):
-        fizz_buzz.fizz_buzz_history(self.histories[i], self.printer)
+      fizz_buzz.fizz_buzz_history(self.histories, self.printer)
     elif selector == '3':
-      fizz_buzz.write(self.histories)
+      fizz_buzz.write(self.histories, self.filename)
     elif selector == '4':
-      if os.path.exists('data.txt'):
-        file = open('data.txt', 'r')
-        while True:
-          line = file.readline()
-          if not line:
-            break
-          self.printer.execute(line.rstrip())
-        file.close
+      fizz_buzz.read(self.filename, self.printer)
