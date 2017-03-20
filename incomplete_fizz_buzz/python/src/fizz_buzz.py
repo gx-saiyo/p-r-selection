@@ -19,14 +19,17 @@ def fizz_buzz(number, printer):
 
 
 def fizz_buzz_history(histories, printer):
-    for number in histories:
-        printer.execute(str(number) + ', ' + get_fizz_buzz_str(number))
+    if hasattr(histories, '__iter__'):
+        for history in histories:
+            printer.execute(str(history) + ', ' + get_fizz_buzz_str(history))
+    else:
+        printer.execute(str(histories) + ', ' + get_fizz_buzz_str(histories))
 
 
 def write(histories):
     file = open('data.txt', 'w')
-    for number in histories:
-        file.write(str(number) + ', ' + get_fizz_buzz_str(number) + '\n')
+    for history in histories:
+        file.write(str(history) + ', ' + get_fizz_buzz_str(history) + '\n')
 
 
 def read_and_print(printer):
