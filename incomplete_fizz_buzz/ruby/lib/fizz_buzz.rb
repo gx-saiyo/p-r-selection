@@ -15,8 +15,7 @@ module FizzBuzz
 
   def write(histories)
     file = File.new('data.txt', 'w')
-    for i in 0 .. (histories.size - 1) do
-      history = histories[i]
+    histories.each do |history|
       str = separater(history)
       file.puts("#{history}, #{str}")
     end
