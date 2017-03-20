@@ -19,7 +19,7 @@ def fizz_buzz(number, printer):
 
 
 def fizz_buzz_history(histories, printer):
-    if hasattr(histories, '__iter__'):
+    if hasattr(histories, '__iter__'): # forループが回せるがどうか判定
         for history in histories:
             printer.execute(str(history) + ', ' + get_fizz_buzz_str(history))
     else:
