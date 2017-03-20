@@ -2,26 +2,41 @@ module FizzBuzz
   module_function
 
   def fizz_buzz(number, printer)
-    str = discriminator(number)
+    str = separater(number)
     printer.execute(str)
   end
 
-  def fizz_buzz_history(number, printer)
-    str = discriminator(number)
-    printer.execute("#{number}, #{str}")
+  def read_history(histories, printer)
+    histories.each do |number|
+      str = separater(number)
+      printer.execute("#{number}, #{str}")
+    end
   end
 
   def write(histories)
     file = File.new('data.txt', 'w')
     for i in 0 .. (histories.size - 1) do
       history = histories[i]
-      str = discriminator(history)
+      str = separater(history)
       file.puts("#{history}, #{str}")
     end
     file.close
   end
 
-  def discriminator(number)
+  def read_file(printer)
+    if File.exist?('data.txt')
+      file = File.new('data.txt', 'r')
+      begin
+        while true
+         printer.execute(file.readline.chomp)
+        end
+      rescue EOFError
+        file.close
+      end
+    end
+  end
+
+  def separater(number)
     if number == 0
       number.to_s
     elsif number % 15 == 0
@@ -34,4 +49,5 @@ module FizzBuzz
       number.to_s
     end
   end
+
 end
