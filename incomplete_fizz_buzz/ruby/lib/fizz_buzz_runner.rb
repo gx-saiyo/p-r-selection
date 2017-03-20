@@ -10,7 +10,7 @@ class FizzBuzzRunner
   def run(selector)
     case selector
     when '1'
-      number = @inputer.gets.to_i
+      number = @inputer.get_input.to_i
       @histories << number
       FizzBuzz.fizz_buzz(number, @printer)
     when '2'

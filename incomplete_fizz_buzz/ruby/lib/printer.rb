@@ -1,6 +1,6 @@
 class Printer
 
-  def execute(s)
+  def output(s)
     puts s
   end
 end

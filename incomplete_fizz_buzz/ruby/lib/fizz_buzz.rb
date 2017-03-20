@@ -3,13 +3,13 @@ module FizzBuzz
 
   def fizz_buzz(number, printer)
     str = separater(number)
-    printer.execute(str)
+    printer.output(str)
   end
 
   def read_history(histories, printer)
     histories.each do |number|
       str = separater(number)
-      printer.execute("#{number}, #{str}")
+      printer.output("#{number}, #{str}")
     end
   end
 
@@ -28,7 +28,7 @@ module FizzBuzz
       file = File.new('data.txt', 'r')
       begin
         while true
-         printer.execute(file.readline.chomp)
+         printer.output(file.readline.chomp)
         end
       rescue EOFError
         file.close
