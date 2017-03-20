@@ -23,15 +23,15 @@ def fizz_buzz_history(histories, printer):
         printer.execute(str(number) + ', ' + get_fizz_buzz_str(number))
 
 
-def write(histories, filename):
-    file = open(filename, 'w')
+def write(histories):
+    file = open('data.txt', 'w')
     for number in histories:
         file.write(str(number) + ', ' + get_fizz_buzz_str(number) + '\n')
 
 
-def read_and_print(filename, printer):
-    if os.path.exists(filename):
-        file = open(filename, 'r')
+def read_and_print(printer):
+    if os.path.exists('data.txt'):
+        file = open('data.txt', 'r')
         while True:
             line = file.readline()
             if not line:
