@@ -29,7 +29,7 @@ def write(histories, filename):
         file.write(str(number) + ', ' + get_fizz_buzz_str(number) + '\n')
 
 
-def read(filename, printer):
+def read_and_print(filename, printer):
     if os.path.exists(filename):
         file = open(filename, 'r')
         while True:

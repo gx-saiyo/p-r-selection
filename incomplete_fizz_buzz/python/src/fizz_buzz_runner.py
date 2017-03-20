@@ -19,4 +19,4 @@ class FizzBuzzRunner:
         elif selector == '3':
             fizz_buzz.write(self.histories, self.filename)
         elif selector == '4':
-            fizz_buzz.read(self.filename, self.printer)
+            fizz_buzz.read_and_print(self.filename, self.printer)
