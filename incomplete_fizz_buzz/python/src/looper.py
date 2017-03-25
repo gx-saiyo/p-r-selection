@@ -1,8 +1,7 @@
 class Looper:
 
-  def __init__(self, fizz_buzz_runner, inputer):
+  def __init__(self, fizz_buzz_runner):
     self.fizz_buzz_runner = fizz_buzz_runner
-    self.inputer = inputer
 
   def loop(self):
     while True:

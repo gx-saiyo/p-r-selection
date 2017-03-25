@@ -7,5 +7,5 @@ if __name__ == '__main__':
   inputer = Inputer()
   printer = Printer()
   runner = FizzBuzzRunner(inputer, printer)
-  looper = Looper(runner, inputer)
+  looper = Looper(runner)
   looper.loop()
