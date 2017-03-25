@@ -6,7 +6,4 @@ class Looper:
 
   def loop(self):
     while True:
-      selector = self.inputer.gets()
-      if selector == '0':
-        return
-      self.fizz_buzz_runner.run(selector)
+      self.fizz_buzz_runner.run()
