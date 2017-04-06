@@ -39,16 +39,11 @@ module FizzBuzz
     fizz = number % 3
     buzz = number % 5
 
-    if number == 0
-      number.to_s
-    elsif (fizz == 0 && buzz == 0)
-      "FizzBuzz"
-    elsif fizz == 0
-      "Fizz"
-    elsif buzz == 0
-      "Buzz"
-    else
-      number.to_s
-    end
+    return number.to_s if number == 0
+    return "FizzBuzz" if (fizz == 0 && buzz == 0)
+    return "Fizz" if fizz == 0
+    return "Buzz" if buzz == 0
+
+    number.to_s
   end
 end
