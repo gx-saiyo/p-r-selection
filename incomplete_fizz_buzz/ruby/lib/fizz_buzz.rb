@@ -27,7 +27,7 @@ module FizzBuzz
       file = File.new('data.txt', 'r')
       begin
         while true
-         printer.execute(file.readline.chomp)
+          printer.execute(file.readline.chomp)
         end
       rescue EOFError
         file.close
