@@ -6,9 +6,11 @@ module FizzBuzz
     printer.execute(judge)
   end
 
-  def fizz_buzz_history(number, printer)
-    judge = judgment(number)
-    printer.execute("#{number}, #{judge}")
+  def fizz_buzz_history(histories, printer)
+    histories.each do |history|
+      judge = judgment(history)
+      printer.execute("#{history}, #{judge}")
+    end
   end
 
   def write(histories)
