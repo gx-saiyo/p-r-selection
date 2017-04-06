@@ -15,9 +15,7 @@ class FizzBuzzRunner
       @histories << number
       FizzBuzz.fizz_buzz(number, @printer)
     when '2'
-      for i in 0 .. (@histories.size - 1) do
-        FizzBuzz.fizz_buzz_history(@histories[i], @printer)
-      end
+      FizzBuzz.fizz_buzz_history(@histories, @printer)
     when '3'
       FizzBuzz.write(@histories)
     when '4'
