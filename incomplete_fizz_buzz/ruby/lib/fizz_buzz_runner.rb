@@ -19,16 +19,7 @@ class FizzBuzzRunner
     when '3'
       FizzBuzz.write(@histories)
     when '4'
-      if File.exist?('data.txt')
-        file = File.new('data.txt', 'r')
-        begin
-          while true
-           @printer.execute(file.readline.chomp)
-          end
-        rescue EOFError
-          file.close
-        end
-      end
+      FizzBuzz.read(@printer)
     end
   end
 end
