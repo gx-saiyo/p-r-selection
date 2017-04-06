@@ -36,13 +36,9 @@ module FizzBuzz
   end
 
   def judgment(number)
-    fizz = number % 3
-    buzz = number % 5
-
-    return number.to_s if number == 0
-    return "FizzBuzz" if (fizz == 0 && buzz == 0)
-    return "Fizz" if fizz == 0
-    return "Buzz" if buzz == 0
+    return "FizzBuzz" if number % 15 == 0
+    return "Fizz" if number % 3 == 0
+    return "Buzz" if number % 5 == 0
 
     number.to_s
   end
