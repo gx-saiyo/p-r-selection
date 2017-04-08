@@ -20,15 +20,15 @@ module FizzBuzz
   end
 
   def read(printer)
-    if File.exist?('data.txt')
-      file = File.new('data.txt', 'r')
-      begin
-        while true
-          printer.execute(file.readline.chomp)
-        end
-      rescue EOFError
-        file.close
+    return unless File.exist?('data.txt')
+
+    file = File.new('data.txt', 'r')
+    begin
+      while true
+        printer.execute(file.readline.chomp)
       end
+    rescue EOFError
+      file.close
     end
   end
 
