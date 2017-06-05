@@ -1,5 +1,10 @@
+package functions;
+
+import output.Printable;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class FizzBuzz {
@@ -38,8 +43,7 @@ public class FizzBuzz {
     try {
       fileWrite = new FileWriter("data.txt");
       bufferedWriter = new BufferedWriter(fileWrite);
-      for (int i=0; i < histories.size(); i++) {
-        int history = histories.get(i);
+      for(Integer history : histories) {
         if(history == 0) {
           bufferedWriter.write(String.valueOf(history) + ", " + String.valueOf(history));
         } else if(history % 15 == 0) {
@@ -55,6 +59,8 @@ public class FizzBuzz {
       }
       bufferedWriter.close();
       fileWrite.close();
-    } catch (Exception e) {}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

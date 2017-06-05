@@ -1,3 +1,5 @@
+package output;
+
 public class Printer implements Printable {
 
   @Override
