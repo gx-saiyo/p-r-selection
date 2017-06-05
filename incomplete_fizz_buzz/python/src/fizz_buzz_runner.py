@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 import os
 import fizz_buzz
+from fizz_buzz_game import FizzBuzzGamer
 
 class FizzBuzzRunner:
 
@@ -27,3 +29,21 @@ class FizzBuzzRunner:
             break
           self.printer.execute(line.rstrip())
         file.close
+    elif selector == '5':
+      self.printer.execute('FizzBuzzゲーム')
+      self.printer.execute('ただのFizzBuzzです')
+      self.printer.execute('CPUとFizzBuzzをしてもらいます')
+      self.printer.execute('CPUは時々間違えるので、それを指摘してください')
+      self.printer.execute('勝利条件: 30ターン内にCPUが間違った答えをした時にdoubtと入力する')
+      self.printer.execute('敗北条件: 30ターンを超える。doubtでないときにdoubtを入力する。FizzBuzzを間違える。')
+
+      while True:
+        self.printer.execute('CPUのレベルを数字で入れてください. 1: 弱い, 2: 普通')
+        self.printer.execute('>')
+        level = self.inputer.gets()
+        if level in ['1', '2']:
+          break
+      
+      self.printer.execute('FizzBuzzスタート')
+      fizz_buzz_gamer = FizzBuzzGamer(level, self.inputer, self.printer)
+      fizz_buzz_gamer.run()
