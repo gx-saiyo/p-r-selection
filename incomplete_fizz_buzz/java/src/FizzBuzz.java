@@ -3,58 +3,69 @@ import java.io.FileWriter;
 import java.util.List;
 
 public class FizzBuzz {
+  private static final String FIZZ_TEXT = "Fizz";
+  private static final String BUZZ_TEXT = "Buzz";
+  private static final String PRIME_TEXT = "not Fizz and Buzz.But Prime!";
 
-  public static void fizzBuzz(int number, Printable printer) {
-    if(number == 0) {
-      printer.execute(String.valueOf(number));
-    } else if(number % 15 == 0) {
-      printer.execute("FizzBuzz");
-    } else if(number % 3 == 0) {
-      printer.execute("Fizz");
-    } else if(number % 5 == 0) {
-      printer.execute("Buzz");
-    } else {
-      printer.execute(String.valueOf(number));
-    }
+  static void fizzBuzz(int number, Printable printer) {
+    printer.execute(fizzbuzzDiscriminant(number));
   }
 
-  public static void fizzBuzzHistory(int number, Printable printer) {
-    if(number == 0) {
-      printer.execute(String.valueOf(number) + ", " + String.valueOf(number));
-    } else if(number % 15 == 0) {
-      printer.execute(String.valueOf(number) + ", FizzBuzz");
-    } else if(number % 3 == 0) {
-      printer.execute(String.valueOf(number) + ", Fizz");
-    } else if(number % 5 == 0) {
-      printer.execute(String.valueOf(number) + ", Buzz");
-    } else {
-      printer.execute(String.valueOf(number) + ", " + String.valueOf(number));
-    }
+  static void fizzBuzzHistory(int number, Printable printer) {
+    printer.execute(String.valueOf(number)+", "+fizzbuzzDiscriminant(number));
   }
 
-  public static void write(List<Integer> histories) {
+  static void write(List<Integer> histories) {
     FileWriter fileWrite = null;
     BufferedWriter bufferedWriter = null;
     try {
       fileWrite = new FileWriter("data.txt");
       bufferedWriter = new BufferedWriter(fileWrite);
-      for (int i=0; i < histories.size(); i++) {
-        int history = histories.get(i);
-        if(history == 0) {
-          bufferedWriter.write(String.valueOf(history) + ", " + String.valueOf(history));
-        } else if(history % 15 == 0) {
-          bufferedWriter.write(String.valueOf(history) + ", FizzBuzz");
-        } else if(history % 3 == 0) {
-          bufferedWriter.write(String.valueOf(history) + ", Fizz");
-        } else if(history % 5 == 0) {
-          bufferedWriter.write(String.valueOf(history) + ", Buzz");
-        } else {
-          bufferedWriter.write(String.valueOf(history) + ", " + String.valueOf(history));
-        }
+      for (int history : histories) {
+        bufferedWriter.write(String.valueOf(history)+", "+fizzbuzzDiscriminant(history));
         bufferedWriter.newLine();
       }
       bufferedWriter.close();
       fileWrite.close();
     } catch (Exception e) {}
+  }
+
+  /**
+   * 入力された値を受け取り，FizzBuzz判定をする式
+   * @param num
+   * @return それぞれに適切な文字列
+   */
+  public static String fizzbuzzDiscriminant(int num){
+    if (num == 0) {
+      return String.valueOf(num);
+    } else if (num % 15 == 0) {
+      return FIZZ_TEXT+BUZZ_TEXT;
+    } else if (num % 3 == 0) {
+      return FIZZ_TEXT;
+    } else if (num % 5 == 0) {
+      return BUZZ_TEXT;
+    } else if (isPrime(num)){
+      return PRIME_TEXT;
+    } else {
+      return String.valueOf(num);
+    }
+  }
+
+  /**
+   * isPrimeメソッド
+   * 入力された値が素数ならtrueを合成数ならfalseを返します
+   * @param inputted
+   * @return 値が素数ならtrue
+   */
+  static boolean isPrime(int inputted){
+    if (inputted <=1){
+      return false;
+    }
+    for (int div = 2;div<=Math.sqrt(inputted);div++){
+      if ((inputted % div) == 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }
