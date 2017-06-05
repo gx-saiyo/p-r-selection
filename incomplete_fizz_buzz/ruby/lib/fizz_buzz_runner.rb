@@ -9,27 +9,17 @@ class FizzBuzzRunner
   end
 
   def run(selector)
-    if selector == '1'
+    case selector
+    when '1'
       number = @inputer.gets.to_i
       @histories << number
       FizzBuzz.fizz_buzz(number, @printer)
-    elsif selector == '2'
-      for i in 0 .. (@histories.size - 1) do
-        FizzBuzz.fizz_buzz_history(@histories[i], @printer)
-      end
-    elsif selector == '3'
+    when '2'
+      FizzBuzz.fizz_buzz_history(@histories, @printer)
+    when '3'
       FizzBuzz.write(@histories)
-    elsif selector == '4'
-      if File.exist?('data.txt')
-        file = File.new('data.txt', 'r')
-        begin
-          while true
-           @printer.execute(file.readline.chomp)
-          end
-        rescue EOFError
-          file.close
-        end
-      end
+    when '4'
+      FizzBuzz.read(@printer)
     end
   end
 end
