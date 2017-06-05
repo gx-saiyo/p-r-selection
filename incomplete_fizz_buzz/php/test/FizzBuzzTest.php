@@ -33,4 +33,9 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
     FizzBuzz::fizz_buzz(1, $spy);
     $this->assertEquals(['1'], $spy->results());
   }
+
+  public function test_rehearsal()
+  {
+      $this->assertEquals(1+1, 2);
+  }
 }
