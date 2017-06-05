@@ -1,56 +1,61 @@
 package ifb
 
 import (
-  "strconv"
-  "os"
-  "bufio"
+	"bufio"
+	"os"
+	"strconv"
 )
 
-func FizzBuzz(number int, printer Printable) {
-  if number == 0 {
-    printer.Execute(strconv.Itoa(number))
-  } else if number % 15 == 0 {
-    printer.Execute("FizzBuzz")
-  } else if number % 3 == 0 {
-    printer.Execute("Fizz")
-  } else if number % 5 == 0 {
-    printer.Execute("Buzz")
-  } else {
-    printer.Execute(strconv.Itoa(number))
-  }
+func judge(number int) (str string) {
+	if number == 0 {
+		str = strconv.Itoa(number)
+	} else if number%15 == 0 {
+		str = "FizzBuzz"
+	} else if number%3 == 0 {
+		str = "Fizz"
+	} else if number%5 == 0 {
+		str = "Buzz"
+	} else {
+		str = strconv.Itoa(number)
+	}
+	return
 }
 
-func FizzBuzzHistory(number int, printer Printable) {
-  if number == 0 {
-    printer.Execute(strconv.Itoa(number) + ", " + strconv.Itoa(number))
-  } else if number % 15 == 0 {
-    printer.Execute(strconv.Itoa(number) + ", FizzBuzz")
-  } else if number % 3 == 0 {
-    printer.Execute(strconv.Itoa(number) + ", Fizz")
-  } else if number % 5 == 0 {
-    printer.Execute(strconv.Itoa(number) + ", Buzz")
-  } else {
-    printer.Execute(strconv.Itoa(number) + ", " + strconv.Itoa(number))
-  }
+func FizzBuzz(number int, printer Printer) {
+	printer.Execute(judge(number))
 }
 
-func Write(histories []int) {
-  file, _ := os.Create("data.txt")
-  writer := bufio.NewWriter(file)
-  for i := 0; i < len(histories); i++ {
-    history := histories[i]
-    if history == 0 {
-      writer.WriteString(strconv.Itoa(history) + ", " + strconv.Itoa(history) + "\n")
-    } else if history % 15 == 0 {
-      writer.WriteString(strconv.Itoa(history) + ", FizzBuzz" + "\n")
-    } else if history % 3 == 0 {
-      writer.WriteString(strconv.Itoa(history) + ", Fizz" + "\n")
-    } else if history % 5 == 0 {
-      writer.WriteString(strconv.Itoa(history) + ", Buzz" + "\n")
-    } else {
-      writer.WriteString(strconv.Itoa(history) + ", " + strconv.Itoa(history) + "\n")
-    }
-  }
-  writer.Flush()
-  file.Close()
+func History(printer Printer, histories []int) {
+	for i := 0; i < len(histories); i++ {
+		printer.Execute(strconv.Itoa(histories[i]) + ", " + judge(histories[i]))
+	}
+}
+
+func WriteHistory(filename string, histories []int) {
+	file, _ := os.Create(filename)
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+
+	for i := 0; i < len(histories); i++ {
+		writer.WriteString(strconv.Itoa(histories[i]) + ", " + judge(histories[i]) + "\n")
+	}
+	writer.Flush()
+}
+
+func ReadHistory(filename string, printer Printer) {
+	_, err := os.Stat(filename)
+	if err != nil {
+		return
+	}
+	file, _ := os.Open(filename)
+	defer file.Close()
+
+	reader := bufio.NewReaderSize(file, 4096)
+	for {
+		line, _, _ := reader.ReadLine()
+		if line == nil {
+			break
+		}
+		printer.Execute(string(line))
+	}
 }

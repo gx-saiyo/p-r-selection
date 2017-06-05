@@ -1,15 +1,19 @@
 package ifb
 
 import (
-  "fmt"
+	"fmt"
 )
 
-type Printer struct {}
-
-func CreatePrinter() *Printer {
-  return new(Printer)
+type Printer interface {
+	Execute(str string)
 }
 
-func (self *Printer) Execute(s string) {
-  fmt.Println(s)
+type Print struct{}
+
+func CreatePrinter() *Print {
+	return new(Print)
+}
+
+func (self *Print) Execute(s string) {
+	fmt.Println(s)
 }
