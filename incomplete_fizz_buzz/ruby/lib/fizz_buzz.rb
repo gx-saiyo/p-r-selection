@@ -1,36 +1,30 @@
 module FizzBuzz
   module_function
 
-  def fizz_buzz(number, printer)
+  def fizz_buzz(number)
     if number == 0
-      printer.execute(number.to_s)
+      return number.to_s
     elsif number % 15 == 0
-      printer.execute('FizzBuzz')
+      return 'FizzBuzz'
     elsif number % 3 == 0
-      printer.execute('Fizz')
+      return 'Fizz'
     elsif number % 5 == 0
-      printer.execute('Buzz')
+      return 'Buzz'
     else
-      printer.execute(number.to_s)
+      return number.to_s
     end
   end
 
-  def fizz_buzz_history(number, printer)
-    if number == 0
-      printer.execute("#{number}, #{number.to_s}")
-    elsif number % 15 == 0
-      printer.execute("#{number}, FizzBuzz")
-    elsif number % 3 == 0
-      printer.execute("#{number}, Fizz")
-    elsif number % 5 == 0
-      printer.execute("#{number}, Buzz")
-    else
-      printer.execute("#{number}, #{number.to_s}")
-    end
+  def judge(number, printer)
+      printer.execute(fizz_buzz(number))
   end
 
-  def write(histories)
-    file = File.new('data.txt', 'w')
+  def show_history(number, printer)
+      printer.execute("#{number}, #{fizz_buzz(number)}")
+  end
+
+  def write_history(histories, file_name)
+    file = File.new(file_name, 'w')
     for i in 0 .. (histories.size - 1) do
       history = histories[i]
       if history == 0
@@ -46,5 +40,19 @@ module FizzBuzz
       end
     end
     file.close
+    puts "#{file_name} に書き込みました."
+  end
+
+  def read_history(printer, file_name)
+    if File.exist?(file_name)
+      file = File.new(file_name, 'r')
+      begin
+        while true
+          printer.execute(file.readline.chomp)
+        end
+      rescue EOFError
+        file.close
+      end
+    end
   end
 end
