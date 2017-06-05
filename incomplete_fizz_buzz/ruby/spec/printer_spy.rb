@@ -4,7 +4,7 @@ class PrinterSpy
     @strings = []
   end
 
-  def execute(s)
+  def output(s)
     @strings << s
   end
 

@@ -4,7 +4,7 @@ class InputerStub
     @values = values
   end
 
-  def  gets
+  def  get_input
     @values.shift
   end
 end

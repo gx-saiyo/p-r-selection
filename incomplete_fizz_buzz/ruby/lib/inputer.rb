@@ -1,6 +1,6 @@
 class Inputer
 
-  def gets
+  def get_input
     STDIN.gets.chomp
   end
 end
