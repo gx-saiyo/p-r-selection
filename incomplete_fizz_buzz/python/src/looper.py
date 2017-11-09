@@ -5,12 +5,15 @@ class Looper:
         self.inputer = inputer
 
     def loop(self):
-        print('1: print result')
-        print('2: print history')
-        print('3: save history')
-        print('4: load history')
-        print('0: finish')
+        description = '=== command description ===\n' \
+                      '1: print result\n' \
+                      '2: print history\n' \
+                      '3: save history\n' \
+                      '4: load history\n' \
+                      '0: end\n' \
+                      '==========================='
         while True:
+            print(description)
             selector = self.inputer.gets()
             if selector == '0':
                 return
