@@ -10,6 +10,7 @@ class FizzBuzzRunner:
 
     def run(self, selector):
         if selector == '1':
+            print('Enter a number.')
             number = int(self.inputer.gets())
             self.histories.append(number)
             fizz_buzz.fizz_buzz(number, self.printer)
