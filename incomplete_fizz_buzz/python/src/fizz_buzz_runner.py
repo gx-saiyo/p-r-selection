@@ -15,8 +15,11 @@ class FizzBuzzRunner:
             self.histories.append(number)
             fizz_buzz.fizz_buzz(number, self.printer)
         elif selector == '2':
-            for i in range(0, len(self.histories)):
-                fizz_buzz.fizz_buzz_history(self.histories[i], self.printer)
+            if self.histories:
+                for i in range(0, len(self.histories)):
+                    fizz_buzz.fizz_buzz_history(self.histories[i], self.printer)
+            else:
+                print('The history is empty.')
         elif selector == '3':
             fizz_buzz.write(self.histories)
         elif selector == '4':
