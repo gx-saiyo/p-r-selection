@@ -27,3 +27,5 @@ class FizzBuzzRunner:
                         break
                     self.printer.execute(line.rstrip())
                     file.close
+        else:
+            print('"%s" is not valid.' % selector)
