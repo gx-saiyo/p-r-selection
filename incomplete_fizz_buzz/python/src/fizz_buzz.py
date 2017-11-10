@@ -1,3 +1,5 @@
+import os
+
 def fizz_buzz(number, printer):
     if number == 0:
         printer.execute(str(number))
@@ -22,8 +24,8 @@ def fizz_buzz_history(number, printer):
     else:
         printer.execute(str(number) + ', ' + str(number))
 
-def write(histories):
-    file = open('data.txt', 'w')
+def write(histories, file_name):
+    file = open('data/' + file_name, 'w')
     for i in range(0, len(histories)):
         history = histories[i]
         if history == 0:
@@ -37,12 +39,14 @@ def write(histories):
         else:
             file.write(str(history) + ', ' + str(history) + '\n')
 
-def read(histories):
-    if os.path.exists('data.txt'):
-        file = open('data.txt', 'r')
+def read(histories, printer, file_name):
+    if os.path.exists(file_name):
+        file = open('data/' + file_name, 'r')
         while True:
             line = file.readline()
             if not line:
                 break
-            self.printer.execute(line.rstrip())
+            printer.execute(line.rstrip())
             file.close
+    else:
+        printer.error('"%s" is not found.' % file_name)
