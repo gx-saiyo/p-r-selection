@@ -4,8 +4,8 @@ from inputer import Inputer
 from looper import Looper
 
 if __name__ == '__main__':
-  inputer = Inputer()
-  printer = Printer()
-  runner = FizzBuzzRunner(inputer, printer)
-  looper = Looper(runner, inputer)
-  looper.loop()
+    inputer = Inputer()
+    printer = Printer()
+    runner = FizzBuzzRunner(inputer, printer)
+    looper = Looper(runner, inputer)
+    looper.loop()
