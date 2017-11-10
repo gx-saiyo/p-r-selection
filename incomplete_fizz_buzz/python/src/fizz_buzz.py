@@ -36,3 +36,13 @@ def write(histories):
             file.write(str(history) + ', Buzz' + '\n')
         else:
             file.write(str(history) + ', ' + str(history) + '\n')
+
+def read(histories):
+    if os.path.exists('data.txt'):
+        file = open('data.txt', 'r')
+        while True:
+            line = file.readline()
+            if not line:
+                break
+            self.printer.execute(line.rstrip())
+            file.close

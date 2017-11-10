@@ -32,13 +32,6 @@ class FizzBuzzRunner:
         elif selector == '3':
             fizz_buzz.write(self.histories)
         elif selector == '4':
-            if os.path.exists('data.txt'):
-                file = open('data.txt', 'r')
-                while True:
-                    line = file.readline()
-                    if not line:
-                        break
-                    self.printer.execute(line.rstrip())
-                    file.close
+            fizz_buzz.read(self.histories)
         else:
             self.printer.error('"%s" is not valid.' % selector)
