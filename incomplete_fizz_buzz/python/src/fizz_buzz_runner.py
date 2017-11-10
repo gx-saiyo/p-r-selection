@@ -13,8 +13,6 @@ class FizzBuzzRunner:
             print('Enter a number.')
             try:
                 number = int(self.inputer.gets())
-                self.histories.append(number)
-                fizz_buzz.fizz_buzz(number, self.printer)
             except ValueError as e:
                 self.printer.error('You must enter a number!')
                 self.printer.error('type: ' + str(type(e)))
@@ -22,6 +20,9 @@ class FizzBuzzRunner:
             except Exception as e:
                 self.printer.error('type: ' + str(type(e)))
                 self.printer.error('message: ' + e.message)
+            else:
+                self.histories.append(number)
+                fizz_buzz.fizz_buzz(number, self.printer)
         elif selector == '2':
             if self.histories:
                 for i in range(0, len(self.histories)):
