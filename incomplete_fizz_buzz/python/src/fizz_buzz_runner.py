@@ -35,10 +35,24 @@ class FizzBuzzRunner:
             print('Enter any save file name.')
             print('If you enter empty value, the file name set current date time.')
             file_name = str(self.inputer.gets())
+            files = [path.split('/')[-1] for path in  glob('data/*')]
             if not file_name:
                 now = datetime.datetime.now()
                 file_name = "data_{0:%Y%m%d_%H%M%S}.txt".format(now)
-            fizz_buzz.write(self.histories, file_name)
+            if file_name in files:
+                while True:
+                    self.printer.warning('"%s" already exists. Do you want to replace it? [y/n]' % file_name)
+                    flag = self.inputer.gets()
+                    if flag == 'y':
+                        fizz_buzz.write(self.histories, file_name)
+                        break
+                    elif flag == 'n':
+                        print('"%s" was not saved.' % file_name)
+                        break
+                    else:
+                        self.printer.error('You must be answer "y" or "n".')
+            else:
+                fizz_buzz.write(self.histories, file_name)
         elif selector == '4':
             print('Enter any load file name.')
             print('If you enter empty value, the file name set the newest file.')
