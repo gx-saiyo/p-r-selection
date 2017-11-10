@@ -25,7 +25,8 @@ def fizz_buzz_history(number, printer):
         printer.execute(str(number) + ', ' + str(number))
 
 def write(histories, file_name):
-    file = open('data/' + file_name, 'w')
+    path = 'data/' + file_name
+    file = open(path, 'w')
     for i in range(0, len(histories)):
         history = histories[i]
         if history == 0:
@@ -38,10 +39,12 @@ def write(histories, file_name):
             file.write(str(history) + ', Buzz' + '\n')
         else:
             file.write(str(history) + ', ' + str(history) + '\n')
+    print('"%s" was saved.' % file_name)
 
 def read(histories, printer, file_name):
-    if os.path.exists(file_name):
-        file = open('data/' + file_name, 'r')
+    path = 'data/' + file_name
+    if os.path.exists(path):
+        file = open(path, 'r')
         while True:
             line = file.readline()
             if not line:
